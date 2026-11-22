@@ -1,0 +1,132 @@
+2026-11-22 18:05:40 | INFO | software_fj | ===== INICIO DE PRUEBAS SOFTWARE FJ =====
+2026-11-22 18:05:40 | INFO | software_fj | SIMULACIÓN 01 - Registro válido de cliente
+2026-11-22 18:05:40 | INFO | software_fj | Cliente registrado: Cliente Ana Pérez | ana@example.com | 3001234567
+2026-11-22 18:05:40 | INFO | software_fj | Simulación 01 finalizada correctamente.
+2026-11-22 18:05:40 | INFO | software_fj | Fin del escenario 01; el sistema continúa activo.
+2026-11-22 18:05:40 | INFO | software_fj | SIMULACIÓN 02 - Registro inválido de cliente
+2026-11-22 18:05:40 | ERROR | software_fj | Error controlado en simulación 02: El nombre debe tener al menos dos caracteres.
+Traceback (most recent call last):
+  File "/mnt/data/software_fj_fase4/main.py", line 17, in ejecutar_prueba
+    operacion()
+    ~~~~~~~~~^^
+  File "/mnt/data/software_fj_fase4/main.py", line 36, in caso_cliente_invalido
+    Cliente("C002", "A", "correo-invalido", "12")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/software_fj_fase4/src/models.py", line 30, in __init__
+    self.nombre = nombre
+    ^^^^^^^^^^^
+  File "/mnt/data/software_fj_fase4/src/models.py", line 41, in nombre
+    raise ErrorValidacionCliente("El nombre debe tener al menos dos caracteres.")
+src.exceptions.ErrorValidacionCliente: El nombre debe tener al menos dos caracteres.
+2026-11-22 18:05:40 | INFO | software_fj | Fin del escenario 02; el sistema continúa activo.
+2026-11-22 18:05:40 | INFO | software_fj | SIMULACIÓN 03 - Creación de sala
+2026-11-22 18:05:40 | INFO | software_fj | Servicio registrado: Sala 'Sala Norte', capacidad 12, tarifa/hora $50000.00
+2026-11-22 18:05:40 | INFO | software_fj | Simulación 03 finalizada correctamente.
+2026-11-22 18:05:40 | INFO | software_fj | Fin del escenario 03; el sistema continúa activo.
+2026-11-22 18:05:40 | INFO | software_fj | SIMULACIÓN 04 - Creación de alquiler de equipo
+2026-11-22 18:05:40 | INFO | software_fj | Servicio registrado: Equipo 'Portátil', unidades disponibles 5, tarifa/día $80000.00
+2026-11-22 18:05:40 | INFO | software_fj | Simulación 04 finalizada correctamente.
+2026-11-22 18:05:40 | INFO | software_fj | Fin del escenario 04; el sistema continúa activo.
+2026-11-22 18:05:40 | INFO | software_fj | SIMULACIÓN 05 - Creación de asesoría
+2026-11-22 18:05:40 | INFO | software_fj | Servicio registrado: Asesoría en Ciberseguridad: $100000.00/hora + recargo 15%
+2026-11-22 18:05:40 | INFO | software_fj | Simulación 05 finalizada correctamente.
+2026-11-22 18:05:40 | INFO | software_fj | Fin del escenario 05; el sistema continúa activo.
+2026-11-22 18:05:40 | INFO | software_fj | SIMULACIÓN 06 - Creación de servicio inválido
+2026-11-22 18:05:40 | ERROR | software_fj | Error de datos en simulación 06: La tarifa base debe ser un número positivo.
+Traceback (most recent call last):
+  File "/mnt/data/software_fj_fase4/main.py", line 17, in ejecutar_prueba
+    operacion()
+    ~~~~~~~~~^^
+  File "/mnt/data/software_fj_fase4/main.py", line 54, in caso_servicio_invalido
+    ReservaSala("S004", "Sala imposible", -10, 0)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/software_fj_fase4/src/services.py", line 48, in __init__
+    super().__init__(identificador, nombre, tarifa_hora, disponible)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/software_fj_fase4/src/services.py", line 13, in __init__
+    raise ValueError("La tarifa base debe ser un número positivo.")
+ValueError: La tarifa base debe ser un número positivo.
+2026-11-22 18:05:40 | INFO | software_fj | Fin del escenario 06; el sistema continúa activo.
+2026-11-22 18:05:40 | INFO | software_fj | SIMULACIÓN 07 - Reserva, confirmación y procesamiento exitosos
+2026-11-22 18:05:40 | INFO | software_fj | Reserva creada: Reserva R001: Ana Pérez -> Sala Norte (PENDIENTE)
+2026-11-22 18:05:40 | INFO | software_fj | Costo final reserva R001: $107100.00
+2026-11-22 18:05:40 | INFO | software_fj | Simulación 07 finalizada correctamente.
+2026-11-22 18:05:40 | INFO | software_fj | Fin del escenario 07; el sistema continúa activo.
+2026-11-22 18:05:40 | INFO | software_fj | SIMULACIÓN 08 - Procesamiento sin confirmar
+2026-11-22 18:05:40 | INFO | software_fj | Reserva creada: Reserva R002: Ana Pérez -> Portátil (PENDIENTE)
+2026-11-22 18:05:40 | ERROR | software_fj | Error controlado en simulación 08: Solo se pueden procesar reservas confirmadas.
+Traceback (most recent call last):
+  File "/mnt/data/software_fj_fase4/main.py", line 17, in ejecutar_prueba
+    operacion()
+    ~~~~~~~~~^^
+  File "/mnt/data/software_fj_fase4/main.py", line 66, in caso_reserva_sin_confirmar
+    reserva.procesar()
+    ~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/software_fj_fase4/src/booking.py", line 34, in procesar
+    raise ErrorReservaInvalida("Solo se pueden procesar reservas confirmadas.")
+src.exceptions.ErrorReservaInvalida: Solo se pueden procesar reservas confirmadas.
+2026-11-22 18:05:40 | INFO | software_fj | Fin del escenario 08; el sistema continúa activo.
+2026-11-22 18:05:40 | INFO | software_fj | SIMULACIÓN 09 - Reserva de servicio no disponible
+2026-11-22 18:05:40 | INFO | software_fj | Servicio registrado: Sala 'Sala fuera de servicio', capacidad 8, tarifa/hora $40000.00
+2026-11-22 18:05:40 | INFO | software_fj | Reserva creada: Reserva R003: Ana Pérez -> Sala fuera de servicio (PENDIENTE)
+2026-11-22 18:05:40 | ERROR | software_fj | Error controlado en simulación 09: El servicio 'Sala fuera de servicio' no está disponible.
+Traceback (most recent call last):
+  File "/mnt/data/software_fj_fase4/main.py", line 17, in ejecutar_prueba
+    operacion()
+    ~~~~~~~~~^^
+  File "/mnt/data/software_fj_fase4/main.py", line 73, in caso_servicio_no_disponible
+    reserva.confirmar()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/software_fj_fase4/src/booking.py", line 24, in confirmar
+    self.servicio.validar_disponibilidad()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/software_fj_fase4/src/services.py", line 20, in validar_disponibilidad
+    raise ErrorServicioNoDisponible(f"El servicio '{self.nombre}' no está disponible.")
+src.exceptions.ErrorServicioNoDisponible: El servicio 'Sala fuera de servicio' no está disponible.
+2026-11-22 18:05:40 | INFO | software_fj | Fin del escenario 09; el sistema continúa activo.
+2026-11-22 18:05:40 | INFO | software_fj | SIMULACIÓN 10 - Confirmación y cancelación
+2026-11-22 18:05:40 | INFO | software_fj | Reserva creada: Reserva R004: Ana Pérez -> Consultoría TI (PENDIENTE)
+2026-11-22 18:05:40 | INFO | software_fj | Estado final R004: CANCELADA
+2026-11-22 18:05:40 | INFO | software_fj | Simulación 10 finalizada correctamente.
+2026-11-22 18:05:40 | INFO | software_fj | Fin del escenario 10; el sistema continúa activo.
+2026-11-22 18:05:40 | INFO | software_fj | SIMULACIÓN 11 - Parámetros inconsistentes en cálculo
+2026-11-22 18:05:40 | ERROR | software_fj | Error controlado en simulación 11: No se pudo calcular el costo de Sala Norte.
+Traceback (most recent call last):
+  File "/mnt/data/software_fj_fase4/src/services.py", line 28, in calcular_costo
+    raise ValueError("Impuesto y descuento deben estar entre 0 y 1.")
+ValueError: Impuesto y descuento deben estar entre 0 y 1.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/software_fj_fase4/main.py", line 17, in ejecutar_prueba
+    operacion()
+    ~~~~~~~~~^^
+  File "/mnt/data/software_fj_fase4/main.py", line 83, in caso_calculo_invalido
+    sistema.sala_demo.calcular_costo(2, impuesto=2.5)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/mnt/data/software_fj_fase4/src/services.py", line 35, in calcular_costo
+    raise ErrorCalculoCosto(f"No se pudo calcular el costo de {self.nombre}.") from causa
+src.exceptions.ErrorCalculoCosto: No se pudo calcular el costo de Sala Norte.
+2026-11-22 18:05:40 | INFO | software_fj | Fin del escenario 11; el sistema continúa activo.
+2026-11-22 18:05:40 | INFO | software_fj | SIMULACIÓN 12 - Intento de cancelar reserva procesada
+2026-11-22 18:05:40 | INFO | software_fj | Reserva creada: Reserva R005: Ana Pérez -> Sala Norte (PENDIENTE)
+2026-11-22 18:05:40 | ERROR | software_fj | Error controlado en simulación 12: No se puede cancelar una reserva en estado PROCESADA.
+Traceback (most recent call last):
+  File "/mnt/data/software_fj_fase4/main.py", line 17, in ejecutar_prueba
+    operacion()
+    ~~~~~~~~~^^
+  File "/mnt/data/software_fj_fase4/main.py", line 90, in caso_cancelar_procesada
+    reserva.cancelar()
+    ~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/software_fj_fase4/src/booking.py", line 29, in cancelar
+    raise ErrorReservaInvalida(f"No se puede cancelar una reserva en estado {self.estado}.")
+src.exceptions.ErrorReservaInvalida: No se puede cancelar una reserva en estado PROCESADA.
+2026-11-22 18:05:40 | INFO | software_fj | Fin del escenario 12; el sistema continúa activo.
+2026-11-22 18:05:40 | INFO | software_fj | SIMULACIÓN 13 - Cálculo polimórfico de los tres servicios
+2026-11-22 18:05:40 | INFO | software_fj | Sala 'Sala Norte', capacidad 12, tarifa/hora $50000.00 | costo de una unidad: $59500.00
+2026-11-22 18:05:40 | INFO | software_fj | Equipo 'Portátil', unidades disponibles 5, tarifa/día $80000.00 | costo de una unidad: $95200.00
+2026-11-22 18:05:40 | INFO | software_fj | Asesoría en Ciberseguridad: $100000.00/hora + recargo 15% | costo de una unidad: $136850.00
+2026-11-22 18:05:40 | INFO | software_fj | Simulación 13 finalizada correctamente.
+2026-11-22 18:05:40 | INFO | software_fj | Fin del escenario 13; el sistema continúa activo.
+2026-11-22 18:05:40 | INFO | software_fj | ===== FIN DE PRUEBAS. Reservas en memoria: 5 =====
